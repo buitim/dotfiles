@@ -1,0 +1,38 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Timothy Bui
+[core]
+	editor = code --wait
+	eol = lf
+[push]
+	default = tracking
+	recurseSubmodules = check
+[fetch]
+	recurseSubmodules = on-demand
+[i18n]
+	filesEncoding = utf-8
+[difftool]
+	prompt = false
+[color]
+	ui = true
+[branch "master"]
+	rebase = true
+[alias]
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	co = checkout
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\"
+	ac = !git add -A && git commit -m
+	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+	nukecur = "!git push origin :$(git branch-name)"
+	new = "!git push --set-upstream origin $(git branch-name)"
+	np = "!git nuke && git push"
+	amend = "!git add . && git commit --amend --no-edit"
+	nb = "!f() { git checkout -b buitimot/$1; git push --set-upstream origin $(git branch-name);}; f"
+	p = "!git fetch -p"
+	conflicts = "!git diff --name-only --diff-filter=U"
+	ffm = "!git checkout master && git pull origin master --ff-only"
+	dt = "!git tag -d $(git tag -l)"
+	resettime = "!git commit --amend --no-edit --reset-author"
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
