@@ -5,6 +5,7 @@
 [core]
 	editor = code --wait
 	eol = lf
+	excludesfile = /Users/buitim/.gitignore
 [push]
 	default = tracking
 	recurseSubmodules = check
