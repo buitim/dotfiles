@@ -2,10 +2,11 @@
 [user]
 # Please adapt and uncomment the following lines:
 	name = Timothy Bui
+	email = buitimot@amazon.com
 [core]
 	editor = code --wait
 	eol = lf
-	excludesfile = /Users/buitim/.gitignore
+	excludesfile = /Users/buitimot/.gitignore
 [push]
 	default = tracking
 	recurseSubmodules = check
@@ -30,10 +31,15 @@
 	np = "!git nuke && git push"
 	amend = "!git add . && git commit --amend --no-edit"
 	nb = "!f() { git checkout -b buitimot/$1; git push --set-upstream origin $(git branch-name);}; f"
-	p = "!git fetch -p"
+	p = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 	conflicts = "!git diff --name-only --diff-filter=U"
 	ffm = "!git checkout master && git pull origin master --ff-only"
 	dt = "!git tag -d $(git tag -l)"
 	resettime = "!git commit --amend --no-edit --reset-author"
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
